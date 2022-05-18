@@ -4,7 +4,7 @@
 
 Computational science often deals with mathematical models of dynamical systems, which are specificied by large sets of parameters. In many cases, these models have to be evaluated numerically by running simulations. 
 
-In simulation research, it is common to store information on parameters in dictionaries mapping parameter names to parameter values, sometimes supplementing parameters with information on physical units. When documenting models in scientific manuscripts, information on model parameters is typically copied and pasted into the manuscript source code, a process which is highly error prone and ineffcient, in particular, when changing parameter values during manuscript production or in the review process. To reduce the efficiency, correctness and reproducibility of computational science, it is desirable to base both model documentation and implementation on identical sources.
+In simulation research, it is common to store information on parameters in dictionaries mapping parameter names to parameter values, sometimes supplementing parameters with information on physical units. When documenting models in scientific manuscripts, information on model parameters is typically copied and pasted into the manuscript source code, a process which is highly error prone and ineffcient, in particular, when changing parameter values during manuscript production or in the review process. To improve the efficiency, correctness and reproducibility of computational science, it is desirable to base both model documentation and implementation on identical sources.
 
 This is an easy task provided information on model parameters is stored in dictionaries such as
 
