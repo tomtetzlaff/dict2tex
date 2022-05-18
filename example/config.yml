@@ -11,9 +11,11 @@ table_columns:
 - field: name
   title: Name
 - field: [value, unit]
-  title: Value (unit)
+  title: Value
 - field: docstring
   title: Description
+
+## relative column widths
 table_column_widths: [1,1,4]
 
 # table_columns:
@@ -25,7 +27,9 @@ table_column_widths: [1,1,4]
 #   title: Unit
 # - field: docstring
 #   title: Description
-# table_column_widths: [1,1,1,5]   ## relative column widths
+
+## relative column widths
+# table_column_widths: [1,1,1,5]   
 
 ## select sections and section titles to be printed in table, and text color
 ##   note: empty titles will not be printed
