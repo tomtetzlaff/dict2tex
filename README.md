@@ -1,4 +1,4 @@
-# `dict2tex` - Tools for converting parameter dictionaries into LaTeX code
+# `dict2tex` - Converting parameter dictionaries into LaTeX code
 
 ## Purpose
 
@@ -29,24 +29,24 @@ This is an easy task provided information on model parameters is stored in dicti
 
 Here, each parameter (such as `N` or `dt`) is not only connected to a `value` and a physical `unit`, but also to a descriptor explaining the meaning of the parameter (`docstring`), LaTeX code for typesetting parameters in LaTeX (`name`), as well as a specification of the parameter type (`section`).
 
-`dict2tex` is a set of tools that help to convert such parameter dictionaries into LaTeX code used for preparing manuscripts, such as parameter tables and macros.
+`dict2tex` contains a set of functions that help to convert such parameter dictionaries into LaTeX code used for preparing manuscripts, such as parameter tables and macros.
 
-## Examples
+## Example
 
-### Parameter tables
+The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. 
 
-The example in the `example` folder can be executed by invoking `make`.
+The full example can be executed by invoking `make'
 
-`example/create_params_file.py`: Creates a mockup-up parameter dictionary and stores it in a json file `params.json`.
+`example/create_params_file.py`: Creates a mock-up parameter set and stores it in `params.json`.
 
-`example/example.py`: Loads `params.json` and converts it into a LaTeX `parameter_table.tex`.
+`example/example.py`: Loads `params.json` and converts it to
 
-`example/example.tex`: LaTeX main manuscript importing `parameter_table.tex`.
+* a LaTeX file `parameter_table.tex` containing a parameter table, and
+* a LaTeX file `macros.tex` containing macro definitions.
+
+`example/example.tex`: LaTeX main manuscript importing and using `macros.tex` and `parameter_table.tex`.
 
 `example/config.yml`: Configuration file used to select and format parameter sections and table columns.
-
-### LaTeX macros
-TODO: convert dictionary keys to LaTeX macros defining parameter names and style.
 
 ## Dependencies
 The code and the examples have been tested with `python 3.9`, and depend only on basic packages such as `json`, `numpy`, and `yaml`.
