@@ -80,18 +80,18 @@ def derived_parameters(pars):
     ## derived network parameters
 
     par("NE",int(pars["gamma"]['value']*pars["N"]['value']),"",
-        "size of excitatory population","network_drvd","$N_\\text{E}=\\gamma{}N$",pars)
+        "size $\gamma{}N$ of excitatory population","network_drvd","$N_\\text{E}$",pars)
     
     par("NI",pars["N"]['value']-pars["NE"]['value'],"",
-        "size of inhibitory population","network_drvd","$N_\\text{I}=(1-\\gamma{})N$",pars)
+        "size $(1-\\gamma{})N$ of inhibitory population","network_drvd","$N_\\text{I}$",pars)
 
     ## derived synapse parameters
 
     par("JE",pars["J"]['value'],"pA",
-        "weight of excitatory synapses","synapse_drvd","$J_\\text{E}=J$",pars)
+        "weight $J$ of excitatory synapses","synapse_drvd","$J_\\text{E}$",pars)
     par("JI",-pars["g"]['value']*pars["J"]['value'],"pA",
         
-        "weight of inhibitory synapses","synapse_drvd","$J_\\text{I}=-gJ$",pars)
+        "weight $-gJ$ of inhibitory synapses","synapse_drvd","$J_\\text{I}$",pars)
 
     return pars
 

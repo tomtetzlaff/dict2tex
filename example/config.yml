@@ -3,7 +3,10 @@
 params_file: 'params.json'
 
 ## name of the target LaTeX file containing the parameter table
-tex_file: 'parameter_table.tex' 
+params_tex_file: 'parameter_table.tex' 
+
+## name of the target LaTeX file containing macro definitions
+macros_tex_file: 'macros.tex' 
 
 ## definition of table columns: parameter fields and column titles
 ##  note: multiple fields can be printed in the same column (e.g., value and unit) using lists of fields

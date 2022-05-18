@@ -8,6 +8,7 @@ Collection of functions used to convert parameter dictionaries into LaTeX code.
 import numpy as np
 
 ##################################################
+
 def load_parameters_from_json(filename):
     '''
     Reads parameter data from json file into a python dictionary.
@@ -30,6 +31,8 @@ def load_parameters_from_json(filename):
         pars = json.load(fp)
         
     return pars
+
+##################################################
 
 def get_section_subdict(pardict,section):
     '''
@@ -54,6 +57,8 @@ def get_section_subdict(pardict,section):
         if pardict[k]['section'] == section:
             subdict[k]=pardict[k]
     return subdict
+
+##################################################
 
 def tex_table_header(texfile,table_columns,table_column_widths=None):
     '''
@@ -125,6 +130,7 @@ def tex_table_footer(texfile):
     f.write(r"\end{tabular}\\" + "\n")
     f.close()
 
+##################################################
 
 def tex_table_core(pars,tex_file, table_columns, table_sections):
     '''
@@ -158,7 +164,8 @@ def tex_table_core(pars,tex_file, table_columns, table_sections):
         
         tex_subtable(pars_section,section_title,table_columns,tex_file,section_color)
 
-        
+##################################################
+
 def tex_subtable(pars_section,section_title,table_columns,texfile,color='black'):
     '''
     Generates LaTeX code for a subtable describing a parameter section.
@@ -205,7 +212,6 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
                         fld_str = r"%s" % pars_section[k][fld]
                     f.write(r"\textcolor{%s}{%s}" % (color,fld_str))                    
                     if cf<len(field)-1:
-                        print("\,",end='')
                         f.write(r"\,")  ## space between fields combined in one column
                 #print("\t",end='')
             else:
@@ -224,5 +230,45 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
         f.write(r"\hline" + "\n")        
     f.close()
 
+##################################################
+
+def tex_macros(pars,macros_tex_file):
+    '''
+    Create LaTeX code for parameter macro definitions and writes it to file.
+
+    Note: LateX macros names match the key names in the parameter dictionary, 
+    with prefix "P" added to avoid colliusion with existing LaTeX function names.
+    Underscores "_" are removed from macros names.
+
+    Arguments:
+    ----------
+    pars: dict
+    Parameter dictionary.
+
+    macros_tex_file: str
+    Name of target LaTeX file containing macro definitions.
+
+    Returns:
+    --------
+    -
+
+    '''
+        
+    f=open(macros_tex_file, 'w')
+    for key in pars:
+        key_str = r"%s" % key
+        key_str = key_str.replace('_','')   ## remove underscores "_'
+
+        name_str = pars[key]['name']
+        name_str = name_str.replace('$','')   ## remove dollar signs
+        
+        ##prefix "P" (like in "P"arameter) added to avoid collision with existing latex function names
+        #f.write(r"\newcommand{\P%s}{\ensuremath{%s}}     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
+        f.write(r"\def\P%s{\ensuremath{%s} }     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
+
+        
+
+    f.close()
+    
 ##################################################
 
