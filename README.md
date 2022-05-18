@@ -35,7 +35,7 @@ Here, each parameter (such as `N` or `dt`) is not only connected to a `value` an
 
 The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. 
 
-The full example can be executed by invoking `make'
+The full example can be executed by invoking `make`
 
 `example/create_params_file.py`: Creates a mock-up parameter set and stores it in `params.json`.
 
