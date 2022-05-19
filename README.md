@@ -17,14 +17,16 @@ on identical sources. This is an easy task, provided information on model parame
         "unit": "",
         "docstring": "network size",
         "section": "network"
-    }, ...
+    },
+	#...
     "dt": {
         "name": "$\\Delta{}t$",
         "value": 0.125,
         "unit": "ms",
         "docstring": "simulation time resolution",
         "section": "simulation"
-    }, ...
+    },
+	#...
 }
 ```
 
@@ -32,7 +34,7 @@ Here, each parameter (such as `N` or `dt`) is not only connected to a `value` an
 
 `dict2tex` constitutes a set of python functions that help to automate the conversion of such parameter dictionaries into LaTeX code used for preparing manuscripts. Two typical use cases are automatically generated parameter tables ([example](https://doi.org/10.1371/journal.pcbi.1007790.s002)), and automatically generated files containg LaTeX macros, such as
 
-```
+```tex
 macros.tex:
 ...
 \def\PN{\ensuremath{N} }           %% network size
