@@ -9,7 +9,7 @@ Computational science often deals with mathematical models specified by large se
 
 on identical sources. This is an easy task, provided information on model parameters is stored in dictionaries such as
 
-```
+```json
 {
     "N": {
         "name": "$N$",
@@ -30,12 +30,31 @@ on identical sources. This is an easy task, provided information on model parame
 
 Here, each parameter (such as `N` or `dt`) is not only connected to a `value` and a physical `unit`, but also to a descriptor explaining the meaning of the parameter (`docstring`), LaTeX code for typesetting parameters in LaTeX (`name`), as well as a specification of the parameter type (`section`).
 
-`dict2tex` constitutes a set of python functions that help to convert such parameter dictionaries into LaTeX code used for preparing manuscripts, such as parameter tables and LaTeX macros.
+`dict2tex` constitutes a set of python functions that help to automate the conversion of such parameter dictionaries into LaTeX code used for preparing manuscripts. Two typical use cases are automatically generated parameter tables ([example](https://doi.org/10.1371/journal.pcbi.1007790.s002)), and automatically generated files containg LaTeX macros, such as
+
+```
+macros.tex:
+...
+\def\PN{\ensuremath{N} }           %% network size
+...
+\def\Pdt{\ensuremath{\Delta{}t} }  %% simulation time resolution
+...
+```
+
+
 
 ## Example
 
-The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. The full example can be executed by invoking `make`.
+The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. The full example can be executed by executing
 
+```console
+cd example
+make
+```
+
+which produces the pdf file `example.pdf`.
+
+### File description
 * `example/create_params_file.py`: Creates a mock-up parameter set and stores it in `params.json`.
 * `example/example.py`: Loads `params.json` and converts it to
 
@@ -45,5 +64,5 @@ The example in the `example` folder demonstrates how to generate LaTeX macros an
 * `example/example.tex`: LaTeX main manuscript importing and using `macros.tex` and `parameter_table.tex`.
 * `example/config.yml`: Configuration file used to select and format parameter sections and table columns.
 
-## Dependencies
+## Requirements
 The code and the example have been tested with `python 3.9`, and depend only on basic python packages such as `json`, `numpy`, and `yaml`.
