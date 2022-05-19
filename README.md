@@ -45,7 +45,7 @@ macros.tex:
 
 ## Example
 
-The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. The full example can be executed by executing
+The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. The full example can be run by executing
 
 ```console
 cd example
