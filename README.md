@@ -18,7 +18,6 @@ on identical sources. This is an easy task, provided information on model parame
         "docstring": "network size",
         "section": "network"
     },
-	#...
     "dt": {
         "name": "$\\Delta{}t$",
         "value": 0.125,
@@ -26,7 +25,6 @@ on identical sources. This is an easy task, provided information on model parame
         "docstring": "simulation time resolution",
         "section": "simulation"
     },
-	#...
 }
 ```
 
