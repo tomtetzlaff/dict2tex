@@ -5,9 +5,6 @@ params_file: 'params.json'
 ## name of the target LaTeX file containing the parameter table
 params_tex_file: 'parameter_table.tex' 
 
-## name of the target LaTeX file containing macro definitions
-macros_tex_file: 'macros.tex' 
-
 ## definition of table columns: parameter fields and column titles
 ##  note: multiple fields can be printed in the same column (e.g., value and unit) using lists of fields
 table_columns:
@@ -20,19 +17,6 @@ table_columns:
 
 ## relative column widths
 table_column_widths: [1,1,4]
-
-# table_columns:
-# - field: name
-#   title: Name
-# - field: value
-#   title: Value
-# - field: unit
-#   title: Unit
-# - field: docstring
-#   title: Description
-
-## relative column widths
-# table_column_widths: [1,1,1,5]   
 
 ## select sections and section titles to be printed in table, and text color
 ##   note: empty titles will not be printed

@@ -9,40 +9,41 @@ in a LaTeX source file (see example.tex).
 
 '''
 
-import os
 import sys
 sys.path.append('../')
-
-import yaml
 import dict2tex
+import yaml
 
 #############################            
 if __name__ == "__main__":
 
-    config_file = 'config.yml'
+    config_params_file = 'config_params.yml'
+    config_macros_file = 'config_macros.yml'
 
-    ## load configuration 
-    with open(config_file, "r") as stream:    
-        config = yaml.safe_load(stream)
+    ## load configurations
+    with open(config_params_file, "r") as stream:    
+        config_params = yaml.safe_load(stream)
 
-    macros_tex_file = config['macros_tex_file']                       
-    params_tex_file = config['params_tex_file']               
-    params_file_json = config['params_file']    
-    table_columns = config['table_columns']
-    table_column_widths = config['table_column_widths']    
-    table_sections = config['table_sections']
-    
+    with open(config_macros_file, "r") as stream:    
+        config_macros = yaml.safe_load(stream)
+        
     ## load parameters
-    pars = dict2tex.load_parameters_from_json(params_file_json)
+    pars = dict2tex.load_parameters_from_json(config_params['params_file'])
 
     ## parameter macro definitions
-    dict2tex.tex_macros(pars,macros_tex_file)
-        
-    ## create parameter table    
-    #### prepare table and set table header
-    dict2tex.tex_table_header(params_tex_file, table_columns, table_column_widths)
-    #### print core of the table for all sections
-    dict2tex.tex_table_core(pars, params_tex_file, table_columns, table_sections)                
-    #### close table
-    dict2tex.tex_table_footer(params_tex_file)
+    dict2tex.tex_macros(pars,config_macros['macros_tex_file']) 
+
+    ## table with parameter macro definitions and 
+    dict2tex.tex_table(pars,\
+                       config_macros['params_tex_file'],\
+                       config_macros['table_columns'],\
+                       config_macros['table_column_widths'],\
+                       config_macros['table_sections'])
+
+    ## create parameter table
+    dict2tex.tex_table(pars,\
+                       config_params['params_tex_file'],\
+                       config_params['table_columns'],\
+                       config_params['table_column_widths'],\
+                       config_params['table_sections'])
 

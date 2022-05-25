@@ -208,6 +208,8 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
                     #print("%s" % pars_section[k][f],end='')
                     if fld =='value':   ## use math fonts for values
                         fld_str = r"$%s$" % pars_section[k][fld]
+                    # elif fld =='key':
+                    #     fld_str = r'%s' % pars_section[k]
                     else:
                         fld_str = r"%s" % pars_section[k][fld]
                     f.write(r"\textcolor{%s}{%s}" % (color,fld_str))                    
@@ -218,6 +220,9 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
                 #print("%s\t" % pars_section[k][field],end='')
                 if field =='value':   ## use math fonts for values
                     field_str = r"$%s$" % pars_section[k][field]
+                # elif field =='key':
+                #     print(pars_section)
+                #     field_str = r'%s' % pars_section[k]
                 else:
                     field_str = r"%s" % pars_section[k][field]
 
@@ -229,6 +234,42 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
  
         f.write(r"\hline" + "\n")        
     f.close()
+
+##################################################
+
+def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections):
+    '''
+    Create LaTeX code for parameter table with parameter definitions extracted from a parameter json file.
+
+    Arguments:
+    ----------
+    pars: dict
+    Parameter dictionary.
+
+    params_tex_file: str
+    Name of the target LaTeX file containg parameter table.
+
+    table_columns: list(dict)
+    List of dictionaries defining table columns (field and title).
+
+    table_column_widths: list(float) or None
+    List of relative columns widths. If None, column widths are automatically chosen by LaTeX.
+
+    table_sections: list(dict)
+    List of dictionaries defining table sections to be printed, section titles, and text color.
+
+    Returns:
+    --------
+    -
+
+    '''
+
+    #### prepare table and set table header
+    tex_table_header(params_tex_file, table_columns, table_column_widths)
+    #### print core of the table for all sections
+    tex_table_core(pars, params_tex_file, table_columns, table_sections)                
+    #### close table
+    tex_table_footer(params_tex_file)
 
 ##################################################
 
@@ -246,7 +287,7 @@ def tex_macros(pars,macros_tex_file):
     Parameter dictionary.
 
     macros_tex_file: str
-    Name of target LaTeX file containing macro definitions.
+    Name of the target LaTeX file containg macro definitions.
 
     Returns:
     --------
@@ -265,8 +306,6 @@ def tex_macros(pars,macros_tex_file):
         ##prefix "P" (like in "P"arameter) added to avoid collision with existing latex function names
         #f.write(r"\newcommand{\P%s}{\ensuremath{%s}}     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
         f.write(r"\def\P%s{\ensuremath{%s} }     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
-
-        
 
     f.close()
     
