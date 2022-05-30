@@ -202,7 +202,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
 
     for k in pars_section:
         for c in range(n_columns):
-            field = table_columns[c]['field']        
+            field = table_columns[c]['field']
             if type(field)==list:
                 for cf,fld in enumerate(field):            
                     #print("%s" % pars_section[k][f],end='')
@@ -220,13 +220,14 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
                 #print("%s\t" % pars_section[k][field],end='')
                 if field =='value':   ## use math fonts for values
                     field_str = r"$%s$" % pars_section[k][field]
-                # elif field =='key':
-                #     print(pars_section)
-                #     field_str = r'%s' % pars_section[k]
+                elif field =='key':   ## used to print parameter keys
+                    field_str = r'\verb+\P%s+' % k                    
                 else:
                     field_str = r"%s" % pars_section[k][field]
 
-                f.write(r"\textcolor{%s}{%s}" % (color,field_str))
+                #f.write(r"\textcolor{%s}{%s}" % (color,field_str))  ## not working with verb
+                #f.write(r"\noindent{\color{%s}{}%s}" % (color,field_str))
+                f.write(r"\noindent{\color{%s}{}%s}" % (color,field_str))                
 
             if c<n_columns-1:
                 f.write(r"  &  ")  ## column separator
