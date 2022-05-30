@@ -98,7 +98,7 @@ def tex_table_header(texfile,table_columns,table_column_widths=None):
         for w in table_column_widths_norm:
             table_format_str += r"p{%.3f\linewidth}|" % (w)
     
-        f.write(r"\begin{tabular}{%s}" % (table_format_str) + "\n")    
+        f.write(r"\begin{tabular}{%s}" % (table_format_str) + "\n")
 
     f.write(r"\hline" + "\n")
 
@@ -200,24 +200,22 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
         f.write(r"\multicolumn{%d}{|>{\columncolor{lightgray}}c|}{\textbf{%s}}\\" % (n_columns,section_title) + "\n")
         f.write(r"\hline" + "\n")
 
+    f.write(r"\ignorespacesafterend" + "\n")                    
     for k in pars_section:
         for c in range(n_columns):
             field = table_columns[c]['field']
             if type(field)==list:
                 for cf,fld in enumerate(field):            
-                    #print("%s" % pars_section[k][f],end='')
                     if fld =='value':   ## use math fonts for values
                         fld_str = r"$%s$" % pars_section[k][fld]
-                    # elif fld =='key':
-                    #     fld_str = r'%s' % pars_section[k]
                     else:
                         fld_str = r"%s" % pars_section[k][fld]
-                    f.write(r"\textcolor{%s}{%s}" % (color,fld_str))                    
+                    #f.write(r"\textcolor{%s}{%s}" % (color,fld_str))  ## not working with verb
+                    f.write(r"{\noindent\color{%s}{}%s}" % (color,fld_str))
+                    #f.write(r"%s" % (fld_str))
                     if cf<len(field)-1:
                         f.write(r"\,")  ## space between fields combined in one column
-                #print("\t",end='')
             else:
-                #print("%s\t" % pars_section[k][field],end='')
                 if field =='value':   ## use math fonts for values
                     field_str = r"$%s$" % pars_section[k][field]
                 elif field =='key':   ## used to print parameter keys
@@ -226,8 +224,8 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
                     field_str = r"%s" % pars_section[k][field]
 
                 #f.write(r"\textcolor{%s}{%s}" % (color,field_str))  ## not working with verb
-                #f.write(r"\noindent{\color{%s}{}%s}" % (color,field_str))
-                f.write(r"\noindent{\color{%s}{}%s}" % (color,field_str))                
+                f.write(r"\noindent{\color{%s}{}%s}" % (color,field_str))
+                #f.write(r"%s" % (field_str))                                
 
             if c<n_columns-1:
                 f.write(r"  &  ")  ## column separator

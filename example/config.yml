@@ -58,14 +58,14 @@ macros_table_tex_file: 'macros_table.tex'
 ## definition of table columns: parameter fields and column titles
 macros_table_columns:
 - field: name
-  title: Name
+  title: Parameter name
 - field: key
-  title: Macro
+  title: Macro name
 - field: docstring
   title: Description
 
 ## relative column widths
-macros_table_column_widths: [1,1,4]
+macros_table_column_widths: [2,2,4]
 
 ## select sections and section titles to be printed in table, and text color
 macros_table_sections:
