@@ -30,7 +30,7 @@ on identical sources. This is an easy task, provided information on model parame
 
 Here, each parameter (such as `N` or `dt`) is not only connected to a `value` and a physical `unit`, but also to a descriptor explaining the meaning of the parameter (`docstring`), LaTeX code for typesetting parameters in LaTeX (`name`), as well as a specification of the parameter type (`section`).
 
-`dict2tex` constitutes a set of python functions that help to automate the conversion of such parameter dictionaries into LaTeX code used for preparing manuscripts. Two typical use cases are automatically generated parameter tables ([example](https://doi.org/10.1371/journal.pcbi.1007790.s002)), and automatically generated files containg LaTeX macros, such as
+`dict2tex.py` contains a set of python functions that help to automate the conversion of such parameter dictionaries into LaTeX code used for preparing manuscripts. Two typical use cases are automatically generated parameter tables ([example](https://doi.org/10.1371/journal.pcbi.1007790.s002)), and automatically generated files containg LaTeX macros, such as
 
 ```tex
 macros.tex:
@@ -45,7 +45,7 @@ macros.tex:
 
 ## Example
 
-The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. The full example can be executed by executing
+The example in the `example` folder demonstrates how to generate LaTeX macros and parameter tables from a toy parameter set. The full example can be run by executing
 
 ```console
 cd example
