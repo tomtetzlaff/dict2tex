@@ -30,7 +30,7 @@ on identical sources. This is an easy task, provided information on model parame
 
 Here, each parameter (such as `N` or `dt`) is not only connected to a `value` and a physical `unit`, but also to a descriptor explaining the meaning of the parameter (`docstring`), LaTeX code for typesetting parameters in LaTeX (`name`), as well as a specification of the parameter type (`section`).
 
-`dict2tex.py` contains a set of python functions that help to automate the conversion of such parameter dictionaries into LaTeX code used for preparing manuscripts. Two typical use cases are automatically generated parameter tables ([example](https://doi.org/10.1371/journal.pcbi.1007790.s002)), and automatically generated files containg LaTeX macros, such as
+`dict2tex.py` contains a set of python functions that help to automate the conversion of such parameter dictionaries into LaTeX code used for preparing manuscripts. Two typical use cases are automatically generated parameter tables ([example](https://doi.org/10.1371/journal.pcbi.1007790.s002)), and automatically generated files containing LaTeX macros, such as
 
 ```tex
 macros.tex:
@@ -58,11 +58,12 @@ which produces the pdf file `example.pdf`.
 * `example/create_params_file.py`: Creates a mock-up parameter set and stores it in `params.json`.
 * `example/example.py`: Loads `params.json` and converts it to
 
-   - a LaTeX file `parameter_table.tex` containing a parameter table, and
-   - a LaTeX file `macros.tex` containing macro definitions.
+   - a LaTeX file `parameter_table.tex` containing a parameter table,
+   - a LaTeX file `macros.tex` containing macro definitions, and
+   - a LaTeX file `macros_table.tex` containing a table showing macro definitions.
 
-* `example/example.tex`: LaTeX main manuscript importing and using `macros.tex` and `parameter_table.tex`.
-* `example/config.yml`: Configuration file used to select and format parameter sections and table columns.
+* `example/example.tex`: LaTeX main manuscript importing `macros.tex`, `macros_table.tex`, and `parameter_table.tex`.
+* `example/config.yml`: Configuration file used to configure table contents and style, macro names, and file names.
 
 ## Requirements
 The code and the example have been tested with `python 3.9`, and depend only on basic python packages such as `json`, `numpy`, and `yaml`.
