@@ -52,6 +52,10 @@ params_table_sections:
 ## name of the target LaTeX file containing macro definitions
 macros_tex_file: 'macros.tex'
 
+## prefix for LaTeX macros (can be used to avoid collisions with LaTeX commands)
+## (example: parameter "gamma" will be turned into macro "\Pgamma" if prefix is 'P')
+macros_prefix: 'P'
+
 ## name of the target LaTeX file containing macro table
 macros_table_tex_file: 'macros_table.tex'
 

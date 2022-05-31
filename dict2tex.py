@@ -132,7 +132,7 @@ def tex_table_footer(texfile):
 
 ##################################################
 
-def tex_table_core(pars,tex_file, table_columns, table_sections):
+def tex_table_core(pars,tex_file, table_columns, table_sections,key_prefix='P'):
     '''
     Generates LaTeX code for a parameter table composed of several sections.
 
@@ -150,6 +150,9 @@ def tex_table_core(pars,tex_file, table_columns, table_sections):
     table_sections: list(dict)
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
+    key_prefix: str
+    ...
+
     Returns:
     --------
     -
@@ -162,11 +165,11 @@ def tex_table_core(pars,tex_file, table_columns, table_sections):
         section_color = table_sections[cs]['color']            
         pars_section = get_section_subdict(pars,section)
         
-        tex_subtable(pars_section,section_title,table_columns,tex_file,section_color)
+        tex_subtable(pars_section,section_title,table_columns,tex_file,section_color,key_prefix)
 
 ##################################################
 
-def tex_subtable(pars_section,section_title,table_columns,texfile,color='black'):
+def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',key_prefix='P'):
     '''
     Generates LaTeX code for a subtable describing a parameter section.
 
@@ -186,6 +189,9 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
 
     color: str
     LaTeX color used for the corresponding text (default: 'black').
+
+    key_prefix: str
+    ...
 
     Returns:
     --------
@@ -219,7 +225,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
                 if field =='value':   ## use math fonts for values
                     field_str = r"$%s$" % pars_section[k][field]
                 elif field =='key':   ## used to print parameter keys
-                    field_str = r'\verb+\P%s+' % k                    
+                    field_str = r'\verb+\%s%s+' % (key_prefix,k)                    
                 else:
                     field_str = r"%s" % pars_section[k][field]
 
@@ -236,7 +242,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black')
 
 ##################################################
 
-def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections):
+def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,key_prefix='P'):
     '''
     Create LaTeX code for parameter table with parameter definitions extracted from a parameter json file.
 
@@ -257,6 +263,9 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     table_sections: list(dict)
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
+    key_prefix: str
+    ...
+
     Returns:
     --------
     -
@@ -266,13 +275,13 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     #### prepare table and set table header
     tex_table_header(params_tex_file, table_columns, table_column_widths)
     #### print core of the table for all sections
-    tex_table_core(pars, params_tex_file, table_columns, table_sections)                
+    tex_table_core(pars, params_tex_file, table_columns, table_sections,key_prefix=key_prefix)                
     #### close table
     tex_table_footer(params_tex_file)
 
 ##################################################
 
-def tex_macros(pars,macros_tex_file):
+def tex_macros(pars,macros_tex_file,macros_prefix='P'):
     '''
     Create LaTeX code for parameter macro definitions and writes it to file.
 
@@ -302,9 +311,9 @@ def tex_macros(pars,macros_tex_file):
         name_str = pars[key]['name']
         name_str = name_str.replace('$','')   ## remove dollar signs
         
-        ##prefix "P" (like in "P"arameter) added to avoid collision with existing latex function names
+        ## key_prefix added to avoid collision with existing latex function names
         #f.write(r"\newcommand{\P%s}{\ensuremath{%s}}     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
-        f.write(r"\def\P%s{\ensuremath{%s} }     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
+        f.write(r"\def\%s%s{\ensuremath{%s} }     %%%% %s" % (macros_prefix,key_str,name_str,pars[key]['docstring']) + "\n")  
 
     f.close()
     

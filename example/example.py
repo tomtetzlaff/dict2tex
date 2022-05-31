@@ -25,17 +25,17 @@ if __name__ == "__main__":
         
     ## load parameters
     pars = dict2tex.load_parameters_from_json(config['params_file'])    
-    #pars = dict2tex.load_parameters_from_json(config_params['params_file'])
 
     ## parameter macro definitions
-    dict2tex.tex_macros(pars,config['macros_tex_file'])     
+    dict2tex.tex_macros(pars,config['macros_tex_file'],config['macros_prefix'])     
 
     ## table with parameter macro definitions and 
     dict2tex.tex_table(pars,\
                        config['macros_table_tex_file'],\
                        config['macros_table_columns'],\
                        config['macros_table_column_widths'],\
-                       config['macros_table_sections'])
+                       config['macros_table_sections'],\
+                       config['macros_prefix'])
     
     ## create parameter table
     dict2tex.tex_table(pars,\
