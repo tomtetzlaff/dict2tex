@@ -151,7 +151,7 @@ def tex_table_core(pars,tex_file, table_columns, table_sections,key_prefix='P'):
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
     key_prefix: str
-    ...
+    Prefix used for LaTeX macro names.
 
     Returns:
     --------
@@ -191,7 +191,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
     LaTeX color used for the corresponding text (default: 'black').
 
     key_prefix: str
-    ...
+    Prefix used for LaTeX macro names.
 
     Returns:
     --------
@@ -225,7 +225,8 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
                 if field =='value':   ## use math fonts for values
                     field_str = r"$%s$" % pars_section[k][field]
                 elif field =='key':   ## used to print parameter keys
-                    field_str = r'\verb+\%s%s+' % (key_prefix,k)                    
+                    field_str = r'\verb+\%s%s+' % (key_prefix,k)
+                    field_str = field_str.replace('_','')   ## remove underscores "_'
                 else:
                     field_str = r"%s" % pars_section[k][field]
 
@@ -264,7 +265,7 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
     key_prefix: str
-    ...
+    Prefix used for LaTeX macro names.
 
     Returns:
     --------
