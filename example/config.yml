@@ -19,7 +19,7 @@ params_table_columns:
   title: Description
 
 ## relative column widths
-params_table_column_widths: [1,1,4]
+params_table_column_widths: [1,2,4]
 
 ## select sections and section titles to be printed in table, and text color
 ## (note: empty titles will not be printed)
@@ -33,6 +33,9 @@ params_table_sections:
 - section: connectivity
   title: Connectivity
   color: black
+- section: connectivity_drvd
+  title: 
+  color: gray
 - section: neuron
   title: Neuron
   color: black  
@@ -42,6 +45,9 @@ params_table_sections:
 - section: synapse_drvd
   title: 
   color: gray
+- section: input
+  title: Input
+  color: black
 - section: simulation
   title: Simulation
   color: black
@@ -74,23 +80,29 @@ macros_table_column_widths: [2,2,4]
 ## select sections and section titles to be printed in table, and text color
 macros_table_sections:
 - section: network
-  title: 
+  title: Network
   color: black
 - section: network_drvd
   title: 
   color: gray
 - section: connectivity
-  title: 
+  title: Connectivity
   color: black
-- section: neuron
+- section: connectivity_drvd
   title: 
+  color: gray
+- section: neuron
+  title: Neuron
   color: black  
 - section: synapse
-  title: 
+  title: Synapse
   color: black
 - section: synapse_drvd
   title: 
   color: gray
+- section: input
+  title: Input
+  color: black
 - section: simulation
-  title: 
+  title: Simulation
   color: black

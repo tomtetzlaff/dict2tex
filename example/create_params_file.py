@@ -63,10 +63,16 @@ def set_parameters():
     ## input parameters
     
     par("rX",20000.0,"spikes/s",
-        "rate of external Poisson sources","input","$\\nu_\\text{X}$",pars)
+        "rate of tonic external Poissonian inputs","input","$\\nu_\\text{X}$",pars)
+
+    par("tstim",[0.5,1.0,1.5,2.0],"s",
+        "times of external input pulses","input","$t_\\text{stim}$",pars)
 
     ## simulation parameters
-    
+
+    par("simulator","NEST 3.0","",
+        "simulation tool","simulation","Simulator",pars)
+
     par("dt",2**-3,"ms",
         "simulation time resolution","simulation","$\\Delta{}t$",pars)
     
@@ -84,6 +90,12 @@ def derived_parameters(pars):
     
     par("NI",pars["N"]['value']-pars["NE"]['value'],"",
         "size $(1-\\gamma{})N$ of inhibitory population","network_drvd","$N_\\text{I}$",pars)
+
+    par("KE",int(pars["gamma"]['value']*pars["K"]['value']),"",
+        "in-degree $\gamma{}K$ of excitatory neurons","connectivity_drvd","$K_\\text{E}$",pars)
+    
+    par("KI",pars["K"]['value']-pars["KE"]['value'],"",
+        "in-degree $(1-\\gamma{})K$ of inhibitory neurons","connectivity_drvd","$K_\\text{I}$",pars)
 
     ## derived synapse parameters
 
