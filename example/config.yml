@@ -21,37 +21,42 @@ params_table_columns:
 ## relative column widths
 params_table_column_widths: [1,2,4]
 
-## select sections and section titles to be printed in table, and text color
-## (note: empty titles will not be printed)
+## select sections and section titles to be printed in table, and text color, and
+## background color of section titles.
+## note: title, color and title_color are optional. If not defined, default values
+## will be used: title=None (no title printed), color=black, and title_color=lightgray
 params_table_sections:
 - section: network
   title: Network
   color: black
+  title_color: lightgray
 - section: network_drvd
-  title: 
   color: gray
 - section: connectivity
   title: Connectivity
   color: black
+  title_color: lightgray
 - section: connectivity_drvd
-  title: 
   color: gray
 - section: neuron
   title: Neuron
-  color: black  
+  color: black
+  title_color: lightgray
 - section: synapse
   title: Synapse
   color: black
+  title_color: lightgray
 - section: synapse_drvd
-  title: 
   color: gray
 - section: input
   title: Input
   color: black
+  title_color: lightgray
 - section: simulation
   title: Simulation
   color: black
-
+  title_color: lightgray
+  
 ######################################################################
 # LaTeX macros
 
@@ -77,32 +82,40 @@ macros_table_columns:
 ## relative column widths
 macros_table_column_widths: [2,2,4]
 
-## select sections and section titles to be printed in table, and text color
+## select sections and section titles to be printed in table, and text color, and
+## background color of section titles.
+## note: title, color and title_color are optional. If not defined, default values
+## will be used: title=None (no title printed), color=black, and title_color=lightgray
 macros_table_sections:
 - section: network
   title: Network
   color: black
+  title_color: lightgray
 - section: network_drvd
-  title: 
   color: gray
+  title_color:  
 - section: connectivity
   title: Connectivity
   color: black
+  title_color: lightgray
 - section: connectivity_drvd
-  title: 
   color: gray
 - section: neuron
   title: Neuron
-  color: black  
+  color: black
+  title_color: lightgray
 - section: synapse
   title: Synapse
   color: black
+  title_color: lightgray
 - section: synapse_drvd
-  title: 
   color: gray
 - section: input
   title: Input
   color: black
+  title_color: lightgray
 - section: simulation
   title: Simulation
   color: black
+  title_color: lightgray
+  

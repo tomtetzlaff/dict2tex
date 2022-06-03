@@ -150,6 +150,8 @@ def tex_table_core(pars,tex_file, table_columns, table_sections,key_prefix='P'):
     table_sections: list(dict)
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
+    ...
+
     key_prefix: str
     Prefix used for LaTeX macro names.
 
@@ -161,15 +163,25 @@ def tex_table_core(pars,tex_file, table_columns, table_sections,key_prefix='P'):
     
     for cs in range(len(table_sections)):
         section = table_sections[cs]['section']
-        section_title = table_sections[cs]['title']
-        section_color = table_sections[cs]['color']            
+        if 'title' in table_sections[cs].keys():                
+            section_title = table_sections[cs]['title']
+        else:
+            section_title = None
+        if 'color' in table_sections[cs].keys():        
+            section_color = table_sections[cs]['color']
+        else:
+            section_color = 'black'
+        if 'title_color' in table_sections[cs].keys():
+            section_title_color = table_sections[cs]['title_color']
+        else:
+            section_title_color = 'lightgray'
         pars_section = get_section_subdict(pars,section)
         
-        tex_subtable(pars_section,section_title,table_columns,tex_file,section_color,key_prefix)
+        tex_subtable(pars_section,section_title,table_columns,tex_file,section_color,section_title_color,key_prefix)
 
 ##################################################
 
-def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',key_prefix='P'):
+def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',section_title_color='lightgray',key_prefix='P'):
     '''
     Generates LaTeX code for a subtable describing a parameter section.
 
@@ -190,6 +202,9 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
     color: str
     LaTeX color used for the corresponding text (default: 'black').
 
+    section_title_color: str
+    Background color of section title (default: 'lightgray').
+
     key_prefix: str
     Prefix used for LaTeX macro names.
 
@@ -203,36 +218,38 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
 
     f=open(texfile, 'a')
     if section_title!=None:
-        f.write(r"\multicolumn{%d}{|>{\columncolor{lightgray}}c|}{\textbf{%s}}\\" % (n_columns,section_title) + "\n")
+        f.write(r"\multicolumn{%d}{|>{\columncolor{%s}}c|}{\textbf{%s}}\\" % (n_columns,section_title_color,section_title) + "\n")
         f.write(r"\hline" + "\n")
 
-    f.write(r"\ignorespacesafterend" + "\n")                    
     for k in pars_section:
         for c in range(n_columns):
             field = table_columns[c]['field']
-            if type(field)==list:
-                for cf,fld in enumerate(field):            
-                    if fld =='value':   ## use math fonts for values
-                        fld_str = r"$%s$" % pars_section[k][fld]
-                    else:
-                        fld_str = r"%s" % pars_section[k][fld]
-                    #f.write(r"\textcolor{%s}{%s}" % (color,fld_str))  ## not working with verb
-                    f.write(r"{\noindent\color{%s}{}%s}" % (color,fld_str))
-                    #f.write(r"%s" % (fld_str))
-                    if cf<len(field)-1:
-                        f.write(r"\,")  ## space between fields combined in one column
-            else:
-                if field =='value':   ## use math fonts for values
-                    field_str = r"$%s$" % pars_section[k][field]
-                elif field =='key':   ## used to print parameter keys
-                    field_str = r'\verb+\%s%s+' % (key_prefix,k)
-                    field_str = field_str.replace('_','')   ## remove underscores "_'
-                else:
-                    field_str = r"%s" % pars_section[k][field]
 
-                #f.write(r"\textcolor{%s}{%s}" % (color,field_str))  ## not working with verb
-                f.write(r"\noindent{\color{%s}{}%s}" % (color,field_str))
-                #f.write(r"%s" % (field_str))                                
+            if type(field)!=list:
+                field = [field]    ## turn field into a list unless it is already a list to avoid redundant code
+            
+            for cf,fld in enumerate(field):  ## necessary to handle case where column consist of multiple fields
+                
+                if fld =='value': 
+                    value = pars_section[k][fld]
+                    if type(value) == str:
+                        fld_str = r"%s" % value
+                    else:
+                        fld_str = r"$%s$" % value  ## use math fonts for numerical values
+                        
+                elif fld =='key':   ## used to print parameter keys
+                    fld_str = r'\verb+\%s%s+' % (key_prefix,k)
+                    fld_str = fld_str.replace('_','')   ## remove underscores "_'
+                        
+                else:
+                    fld_str = r"%s" % pars_section[k][fld]
+                    
+                #f.write(r"\textcolor{%s}{%s}" % (color,fld_str))  ## not working with \verb
+                f.write(r"{\noindent\color{%s}{}%s}" % (color,fld_str))
+                #f.write(r"%s" % (fld_str))
+                
+                if cf<len(field)-1:
+                    f.write(r"\,")  ## space between fields combined in one column
 
             if c<n_columns-1:
                 f.write(r"  &  ")  ## column separator
