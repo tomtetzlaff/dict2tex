@@ -35,6 +35,8 @@ if __name__ == "__main__":
                        config['macros_table_columns'],\
                        config['macros_table_column_widths'],\
                        config['macros_table_sections'],\
+                       config['section_text_color'],\
+                       config['section_title_color'],\
                        config['macros_prefix'])
     
     ## create parameter table
@@ -42,5 +44,7 @@ if __name__ == "__main__":
                        config['params_table_tex_file'],\
                        config['params_table_columns'],\
                        config['params_table_column_widths'],\
-                       config['params_table_sections'])
+                       config['params_table_sections'],\
+                       config['section_text_color'],\
+                       config['section_title_color'])
 

@@ -2,6 +2,9 @@
 # name of the source json file containing parameter definitions
 params_file: 'params.json'
 
+section_text_color: black      ## default text color for table sections
+section_title_color: lightgray ## default background color of table section titles
+
 ######################################################################
 # parameter table
 
@@ -28,34 +31,22 @@ params_table_column_widths: [1,2,4]
 params_table_sections:
 - section: network
   title: Network
-  color: black
-  title_color: lightgray
 - section: network_drvd
   color: gray
 - section: connectivity
   title: Connectivity
-  color: black
-  title_color: lightgray
 - section: connectivity_drvd
   color: gray
 - section: neuron
   title: Neuron
-  color: black
-  title_color: lightgray
 - section: synapse
   title: Synapse
-  color: black
-  title_color: lightgray
 - section: synapse_drvd
   color: gray
 - section: input
   title: Input
-  color: black
-  title_color: lightgray
 - section: simulation
   title: Simulation
-  color: black
-  title_color: lightgray
   
 ######################################################################
 # LaTeX macros
@@ -89,33 +80,20 @@ macros_table_column_widths: [2,2,4]
 macros_table_sections:
 - section: network
   title: Network
-  color: black
-  title_color: lightgray
 - section: network_drvd
   color: gray
-  title_color:  
 - section: connectivity
   title: Connectivity
-  color: black
-  title_color: lightgray
 - section: connectivity_drvd
   color: gray
 - section: neuron
   title: Neuron
-  color: black
-  title_color: lightgray
 - section: synapse
   title: Synapse
-  color: black
-  title_color: lightgray
 - section: synapse_drvd
   color: gray
 - section: input
   title: Input
-  color: black
-  title_color: lightgray
 - section: simulation
   title: Simulation
-  color: black
-  title_color: lightgray
   

@@ -131,8 +131,7 @@ def tex_table_footer(texfile):
     f.close()
 
 ##################################################
-
-def tex_table_core(pars,tex_file, table_columns, table_sections,key_prefix='P'):
+def tex_table_core(pars,tex_file,table_columns,table_sections,section_text_color,section_title_color,key_prefix='P'):
     '''
     Generates LaTeX code for a parameter table composed of several sections.
 
@@ -150,7 +149,10 @@ def tex_table_core(pars,tex_file, table_columns, table_sections,key_prefix='P'):
     table_sections: list(dict)
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
-    ...
+    section_text_color: str
+
+    section_title_color: str
+
 
     key_prefix: str
     Prefix used for LaTeX macro names.
@@ -170,11 +172,11 @@ def tex_table_core(pars,tex_file, table_columns, table_sections,key_prefix='P'):
         if 'color' in table_sections[cs].keys():        
             section_color = table_sections[cs]['color']
         else:
-            section_color = 'black'
+            section_color = section_text_color
         if 'title_color' in table_sections[cs].keys():
             section_title_color = table_sections[cs]['title_color']
         else:
-            section_title_color = 'lightgray'
+            section_title_color = section_title_color
         pars_section = get_section_subdict(pars,section)
         
         tex_subtable(pars_section,section_title,table_columns,tex_file,section_color,section_title_color,key_prefix)
@@ -260,7 +262,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
 
 ##################################################
 
-def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,key_prefix='P'):
+def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,section_text_color='black',section_title_color='lightgray',key_prefix='P'):
     '''
     Create LaTeX code for parameter table with parameter definitions extracted from a parameter json file.
 
@@ -281,6 +283,12 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     table_sections: list(dict)
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
+    section_text_color: str
+    ...
+
+    section_title_color: str
+    ...
+
     key_prefix: str
     Prefix used for LaTeX macro names.
 
@@ -293,7 +301,7 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     #### prepare table and set table header
     tex_table_header(params_tex_file, table_columns, table_column_widths)
     #### print core of the table for all sections
-    tex_table_core(pars, params_tex_file, table_columns, table_sections,key_prefix=key_prefix)                
+    tex_table_core(pars, params_tex_file, table_columns, table_sections,section_text_color,section_title_color,key_prefix=key_prefix)                
     #### close table
     tex_table_footer(params_tex_file)
 
