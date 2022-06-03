@@ -307,6 +307,33 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
 
 ##################################################
 
+def convert_field_to_tex_string(field, field_type):
+    '''
+    Converts a given parameter field into an appropriate LaTeX string with type dependent formatting.
+
+    Arguments:
+    ----------
+    field: int, float, str or lists thereof
+    Parameter field to be comverted to LaTeX string.
+
+    field_type: str
+    Type of the field, such as 'value', 'unit', 'docstring', 'section', 'key', 'macro'.
+
+    Returns:
+    --------
+    field_str: str
+    LaTeX string.
+
+    '''
+    
+    ## field_type == 'value' and type(field)!=str: math mode for numerical values, simple string else
+    ## field_type == 'value' and type(field)==str: string
+    ## field_type == 'unit': string
+    ## field_type == 'key': verbatim (typewriter)
+    ## field_type == 'macro': verbatim, remove characters such as "_", add prefixes, e.g., "\P" 
+    ## field_type == 'docstring': string
+##################################################
+
 def tex_macros(pars,macros_tex_file,macros_prefix='P'):
     '''
     Create LaTeX code for parameter macro definitions and writes it to file.
