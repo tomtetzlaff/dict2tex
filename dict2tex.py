@@ -131,7 +131,7 @@ def tex_table_footer(texfile):
     f.close()
 
 ##################################################
-def tex_table_core(pars,tex_file,table_columns,table_sections,section_text_color,section_title_color,key_prefix='P'):
+def tex_table_core(pars,tex_file,table_columns,table_sections,section_text_color,section_title_color,macro_prefix='P'):
     '''
     Generates LaTeX code for a parameter table composed of several sections.
 
@@ -154,7 +154,7 @@ def tex_table_core(pars,tex_file,table_columns,table_sections,section_text_color
     section_title_color: str
 
 
-    key_prefix: str
+    macro_prefix: str
     Prefix used for LaTeX macro names.
 
     Returns:
@@ -179,11 +179,11 @@ def tex_table_core(pars,tex_file,table_columns,table_sections,section_text_color
             section_title_color = section_title_color
         pars_section = get_section_subdict(pars,section)
         
-        tex_subtable(pars_section,section_title,table_columns,tex_file,section_color,section_title_color,key_prefix)
+        tex_subtable(pars_section,section_title,table_columns,tex_file,section_color,section_title_color,macro_prefix)
 
 ##################################################
 
-def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',section_title_color='lightgray',key_prefix='P'):
+def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',section_title_color='lightgray',macro_prefix='P'):
     '''
     Generates LaTeX code for a subtable describing a parameter section.
 
@@ -207,7 +207,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
     section_title_color: str
     Background color of section title (default: 'lightgray').
 
-    key_prefix: str
+    macro_prefix: str
     Prefix used for LaTeX macro names.
 
     Returns:
@@ -227,34 +227,35 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
         for c in range(n_columns):
             field = table_columns[c]['field']
 
+            ## turn field into a list unless it is already a list to avoid redundant code
             if type(field)!=list:
-                field = [field]    ## turn field into a list unless it is already a list to avoid redundant code
+                field = [field]
             
             for cf,fld in enumerate(field):  ## necessary to handle case where column consist of multiple fields
-                
-                if fld =='value': 
-                    value = pars_section[k][fld]
-                    if type(value) == str:
-                        fld_str = r"%s" % value
-                    else:
-                        fld_str = r"$%s$" % value  ## use math fonts for numerical values
-                        
-                elif fld =='key':   ## used to print parameter keys
-                    fld_str = r'\verb+\%s%s+' % (key_prefix,k)
-                    fld_str = fld_str.replace('_','')   ## remove underscores "_'
-                        
+
+                ## field specific text formatting
+                prefix = ''
+                if fld == 'key':
+                    value = k
+                elif fld == 'macro':
+                    value = k
+                    prefix = macro_prefix
                 else:
-                    fld_str = r"%s" % pars_section[k][fld]
-                    
+                    value = pars_section[k][fld]
+                fld_str = convert_field_to_tex_string(value, fld, prefix=prefix)
+                
+                ## define text color
                 #f.write(r"\textcolor{%s}{%s}" % (color,fld_str))  ## not working with \verb
                 f.write(r"{\noindent\color{%s}{}%s}" % (color,fld_str))
-                #f.write(r"%s" % (fld_str))
-                
-                if cf<len(field)-1:
-                    f.write(r"\,")  ## space between fields combined in one column
 
+                ## add space between fields combined in one column
+                if cf<len(field)-1:
+                    f.write(r"\,") 
+
+            ## add column separator
             if c<n_columns-1:
-                f.write(r"  &  ")  ## column separator
+                f.write(r"  &  ")  
+                
         f.write(r"\\" + "\n")
  
         f.write(r"\hline" + "\n")        
@@ -262,7 +263,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
 
 ##################################################
 
-def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,section_text_color='black',section_title_color='lightgray',key_prefix='P'):
+def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,section_text_color='black',section_title_color='lightgray',macro_prefix='P'):
     '''
     Create LaTeX code for parameter table with parameter definitions extracted from a parameter json file.
 
@@ -289,7 +290,7 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     section_title_color: str
     ...
 
-    key_prefix: str
+    macro_prefix: str
     Prefix used for LaTeX macro names.
 
     Returns:
@@ -300,24 +301,28 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
 
     #### prepare table and set table header
     tex_table_header(params_tex_file, table_columns, table_column_widths)
+    
     #### print core of the table for all sections
-    tex_table_core(pars, params_tex_file, table_columns, table_sections,section_text_color,section_title_color,key_prefix=key_prefix)                
+    tex_table_core(pars, params_tex_file, table_columns, table_sections,section_text_color,section_title_color,macro_prefix=macro_prefix)                
     #### close table
     tex_table_footer(params_tex_file)
 
 ##################################################
 
-def convert_field_to_tex_string(field, field_type):
+def convert_field_to_tex_string(field, field_type, prefix=''):
     '''
     Converts a given parameter field into an appropriate LaTeX string with type dependent formatting.
 
     Arguments:
     ----------
     field: int, float, str or lists thereof
-    Parameter field to be comverted to LaTeX string.
+    Parameter field to be converted to LaTeX string.
 
     field_type: str
     Type of the field, such as 'value', 'unit', 'docstring', 'section', 'key', 'macro'.
+
+    prefix: str
+    Prefix to be used for macros (optional)
 
     Returns:
     --------
@@ -325,13 +330,29 @@ def convert_field_to_tex_string(field, field_type):
     LaTeX string.
 
     '''
-    
-    ## field_type == 'value' and type(field)!=str: math mode for numerical values, simple string else
-    ## field_type == 'value' and type(field)==str: string
-    ## field_type == 'unit': string
-    ## field_type == 'key': verbatim (typewriter)
-    ## field_type == 'macro': verbatim, remove characters such as "_", add prefixes, e.g., "\P" 
-    ## field_type == 'docstring': string
+
+    # math mode for numerical values, simple string else
+    if field_type == 'value' and type(field)!=str:    
+        field_str = r"$%s$" % field
+
+    # verbatim (typewriter) for keys        
+    elif field_type == 'key':                         
+        field_str = r"\verb+%s+" % field
+
+    # verbatim for macros, remove characters such as "_", add prefixes, e.g., "\P"         
+    elif field_type == 'macro':                       
+        field_str = r"\verb+\%s%s+" % (prefix,field)
+        field_str = field_str.replace('_','')   ## remove underscores "_'
+
+    # no formatting if
+    # field_type == 'value' and type(field)==str: string, or
+    # field_type == 'unit': string, or
+    # field_type == 'docstring': string        
+    else:
+        field_str = "%s" % (field)
+
+    return field_str
+
 ##################################################
 
 def tex_macros(pars,macros_tex_file,macros_prefix='P'):
@@ -364,7 +385,7 @@ def tex_macros(pars,macros_tex_file,macros_prefix='P'):
         name_str = pars[key]['name']
         name_str = name_str.replace('$','')   ## remove dollar signs
         
-        ## key_prefix added to avoid collision with existing latex function names
+        ## macro_prefix added to avoid collision with existing latex function names
         #f.write(r"\newcommand{\P%s}{\ensuremath{%s}}     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
         f.write(r"\def\%s%s{\ensuremath{%s} }     %%%% %s" % (macros_prefix,key_str,name_str,pars[key]['docstring']) + "\n")  
 
