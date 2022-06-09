@@ -1,0 +1,70 @@
+## Template for configuration file defining
+## - source and target file names
+## - table format and style.
+
+## Name of the source json file containing parameter definitions (e.g., 'params.json')
+params_file: 'params.json'
+
+## Default LaTeX text color for table sections (e.g., 'black', 'gray', ...).
+section_text_color: black
+
+## Default background LaTeX color of table section titles (e.g., 'lightgray', ...).
+section_title_color: lightgray 
+
+######################################################################
+# Parameter tables
+
+## Name of the target LaTeX file containing the parameter table (e.g., 'parameters_table.tex').
+table_tex_file: 'parameter_table.tex' 
+
+## Definition of table columns: parameter fields and column titles.
+## Multiple fields can be printed in the same column using lists of fields (e.g., [value, unit]).
+## Apart from the keys defined in the parameter dictionary ('name, 'value', 'unit', 'docstring'), 'fields' can assume
+## two additional values 'key' and 'macro', which can be used to print the parameter code names and LaTeX macro definitions.
+table_columns:
+- field: name
+  title: Name
+- field: [value, unit]
+  title: Value
+- field: docstring
+  title: Description
+
+## Relative column widths (length of list must match number of sections in `table_columns`; e.g. [1,2,4]).
+table_column_widths: [1,2,4]
+
+## Select sections ('section') and section titles ('title') to be printed in the table,
+## as well as text color ('color'), and background color of section headers ('title_color').
+## The title, color and title_color are optional. If not defined, default values
+## will be used: title=None (no title printed), color='black', and title_color='lightgray'.
+table_sections:
+- section: network
+  title: Network
+  #title_color: lightgray
+  #color: black
+- section: network_drvd
+  color: gray
+- section: connectivity
+  title: Connectivity
+- section: connectivity_drvd
+  color: gray
+- section: neuron
+  title: Neuron
+- section: synapse
+  title: Synapse
+- section: synapse_drvd
+  color: gray
+- section: input
+  title: Input
+- section: simulation
+  title: Simulation
+  
+######################################################################
+# LaTeX macros
+
+## Name of the target LaTeX file containing macro definitions (e.g., 'macros.tex').
+macros_tex_file: 'macros.tex'
+
+## Prefix for LaTeX macros (can be used to avoid collisions with LaTeX commands; e.g. 'P').
+## Example: parameter "gamma" will be turned into macro "\Pgamma" if prefix is 'P'.
+macros_prefix: 'P'
+

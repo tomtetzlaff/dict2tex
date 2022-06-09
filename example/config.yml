@@ -2,7 +2,7 @@
 # name of the source json file containing parameter definitions
 params_file: 'params.json'
 
-section_text_color: black      ## default text color for table sections
+section_text_color: 'black'      ## default text color for table sections
 section_title_color: lightgray ## default background color of table section titles
 
 ######################################################################
