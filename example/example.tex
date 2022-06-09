@@ -12,6 +12,8 @@
 \usepackage{cleveref}
 \crefformat{table}{Table\,#2#1#3}
 
+\usepackage{minted}
+
 \begin{document}
 
 \title{\texttt{dict2tex} example}
@@ -23,7 +25,7 @@
 
 \section{Parameter tables}
 
-\cref{tab:parameter_table} constitutes an example of a parameter table automatically generated from the parameter dictionary \texttt{params.json} using the configuration defined in \texttt{config.yml}: 
+\cref{tab:parameter_table} constitutes an example of a parameter table automatically generated from the parameter dictionary \texttt{params.json} (see \cref{app:parameter_file}) using the configuration defined in \texttt{config.yml} (see \cref{app:config_file}): 
 \begin{table}[ht!]
 \begin{center}
   \parbox{0.8\linewidth}{       %% use parbox to define table width within latex
@@ -51,10 +53,11 @@ The following text examples use LaTeX macros for parameter names automatically g
 \end{itemize}
 %%
 For an overview, the macro definitions can be visualized in a table such as \cref{tab:macros_table}.
-The table is automatically generated from the parameter dictionary \texttt{params.json} using the configuration defined in \texttt{config.yml}.
+The table is automatically generated from the parameter dictionary \texttt{params.json} (see \cref{app:parameter_file}) using the configuration defined in \texttt{config.yml} (see \cref{app:config_file}).
 %%
 \par
 Macro names are automatically generated from the keys of the parameter dictionary (column ``Name (code)'' in \cref{tab:macros_table}) by removing underscores (``\verb+_+''), and by adding a prefix (here ``\verb+P+'') to avoid potential collisions with other LaTeX functions. The prefix can be configured by defining \verb+macros_prefix+ in \texttt{config.yml}.
+%%
 \begin{table}[ht!]
 \begin{center}
   \parbox{0.8\linewidth}{       %% use parbox to define table width within latex
@@ -68,6 +71,27 @@ Macro names are automatically generated from the keys of the parameter dictionar
   }
 \end{center}
 \end{table}
+
+\clearpage
+
+\begin{appendix}
+  
+  \section{Parameter file \texttt{params.json}}
+  \label{app:parameter_file}
+  %\footnotesize
+  \scriptsize
+  \inputminted{json}{params.json}  
+
+  \clearpage
+  
+  \section{Configuration file \texttt{config.yml}}
+  \label{app:config_file}
+  \small
+  \inputminted{yaml}{config.yml}  
+
+\end{appendix}
+
+%%%%%%%%%%%%%%%
 
 \end{document}
  

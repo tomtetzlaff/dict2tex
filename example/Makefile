@@ -7,8 +7,8 @@ all: example
 example: example.tex example.py config.yml ../dict2tex.py params.json
 
 	python example.py && \
-	pdflatex example.tex && \
-	pdflatex example.tex
+	pdflatex --shell-escape example.tex && \
+	pdflatex --shell-escape example.tex
 
 ## generate a mock-up parameter file
 params.json: create_params_file.py

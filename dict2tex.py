@@ -36,7 +36,7 @@ def load_parameters_from_json(filename):
 
 def get_section_subdict(pardict,section):
     '''
-    Extracts all entries from pardict corresponding to a given section.
+    Extracts all entries from the parameter dictionary pardict corresponding to a given section.
 
     Arguments:
     ----------
@@ -67,7 +67,7 @@ def tex_table_header(texfile,table_columns,table_column_widths=None):
     Arguments:
     ----------
     texfile: str
-    Name of the LaTeX file.
+    Name of the target LaTeX file.
 
     table_columns: list(dict)
     List of dictionaries defining table columns (field and title).
@@ -190,7 +190,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
     Arguments:
     ----------
     pars_section: dict
-    Parameter subdictionary corresponding to some parameter section.
+    Parameter subdictionary corresponding to the specified parameter section.
 
     section_title: str
     (Sub-)table header.
@@ -199,13 +199,13 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
     List of dictionaries defining table columns (field and title).
 
     texfile: str
-    Name of the LaTeX file.
+    Name of the target LaTeX file.
 
     color: str
-    LaTeX color used for the corresponding text (default: 'black').
+    LaTeX color used for the corresponding text (optional; default: 'black').
 
     section_title_color: str
-    Background color of section title (default: 'lightgray').
+    Background color of section title (optional; default: 'lightgray').
 
     macro_prefix: str
     Prefix used for LaTeX macro names.
@@ -273,7 +273,7 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     Parameter dictionary.
 
     params_tex_file: str
-    Name of the target LaTeX file containg parameter table.
+    Name of the target LaTeX file containing parameter table.
 
     table_columns: list(dict)
     List of dictionaries defining table columns (field and title).
@@ -285,13 +285,13 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     List of dictionaries defining table sections to be printed, section titles, and text color.
 
     section_text_color: str
-    ...
+    LaTeX color for text fonts in table (optional; default: "black").
 
     section_title_color: str
-    ...
+    LaTeX background color for subtable title (optional; default: "lightgray").
 
     macro_prefix: str
-    Prefix used for LaTeX macro names.
+    Prefix used for LaTeX macro names (optional; default: "P").
 
     Returns:
     --------
@@ -319,10 +319,10 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
     Parameter field to be converted to LaTeX string.
 
     field_type: str
-    Type of the field, such as 'value', 'unit', 'docstring', 'section', 'key', 'macro'.
+    Type of the parameter field, such as 'value', 'unit', 'docstring', 'section', 'key', 'macro'.
 
     prefix: str
-    Prefix to be used for macros (optional)
+    Prefix to be used for macros (optional; default: '').
 
     Returns:
     --------
@@ -360,7 +360,7 @@ def tex_macros(pars,macros_tex_file,macros_prefix='P'):
     Create LaTeX code for parameter macro definitions and writes it to file.
 
     Note: LateX macros names match the key names in the parameter dictionary, 
-    with prefix "P" added to avoid colliusion with existing LaTeX function names.
+    with prefix macros_prefix added to avoid collisions with existing LaTeX function names.
     Underscores "_" are removed from macros names.
 
     Arguments:
@@ -371,6 +371,9 @@ def tex_macros(pars,macros_tex_file,macros_prefix='P'):
     macros_tex_file: str
     Name of the target LaTeX file containg macro definitions.
 
+    macros_prefix: str
+    Prefix used for LaTeX macro names (optional; default: 'P').
+
     Returns:
     --------
     -
@@ -379,6 +382,7 @@ def tex_macros(pars,macros_tex_file,macros_prefix='P'):
         
     f=open(macros_tex_file, 'w')
     for key in pars:
+
         key_str = r"%s" % key
         key_str = key_str.replace('_','')   ## remove underscores "_'
 
@@ -387,7 +391,8 @@ def tex_macros(pars,macros_tex_file,macros_prefix='P'):
         
         ## macro_prefix added to avoid collision with existing latex function names
         #f.write(r"\newcommand{\P%s}{\ensuremath{%s}}     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
-        f.write(r"\def\%s%s{\ensuremath{%s} }     %%%% %s" % (macros_prefix,key_str,name_str,pars[key]['docstring']) + "\n")  
+        f.write(r"\def\%s%s{\ensuremath{%s} }     %%%% %s" % (macros_prefix,key_str,name_str,pars[key]['docstring']) + "\n")
+
 
     f.close()
     

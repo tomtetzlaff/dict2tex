@@ -1,9 +1,16 @@
 '''
-This example demonstrates how a python dictionary containg a number of parameter sets can 
-be turned into a LaTeX ("Nordlie") table.
+This example turns a python dictionary (params.json) containing parameter definitions 
+into LaTeX code for parameter tables and macro definitions.
 
-Executing this script generates a file parameter_table.tex, which can be included 
-in a LaTeX source file (see example.tex).
+Executing this script generates the files 
+
+- parameter_table.tex: table showing parameter names, values, units, and a description,
+- macros.tex: LaTeX macro definitions, and
+- macros_table.tex: table showing mapping of parameter keys and names to LaTeX macros 
+
+which can be included in a LaTeX source file (see example.tex).
+
+The table styles are configurable (see config.yml).
 
 (Tom Tetzlaff, 2022)
 
