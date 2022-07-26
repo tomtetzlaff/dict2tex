@@ -45,31 +45,31 @@ macros.tex:
 
 1. Clone this repository:
 
-    ```
+    ```console
     git clone https://github.com/tomtetzlaff/dict2tex.git
     ```
     
     or
     
-    ```
+    ```console
     git clone git@github.com:tomtetzlaff/dict2tex.git
     ```
 
 2. Enter the source directory:
 
-    ```
+    ```console
     cd dict2tex
     ```
 
 3. Install the python package:
 
-    ```
+    ```console
     pip install .
     ```
 
     or
 
-    ```
+    ```console
     python setup.py install
     ```
 
