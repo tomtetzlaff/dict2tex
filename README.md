@@ -61,7 +61,7 @@ macros.tex:
     cd dict2tex
     ```
 
-3. Install the python package:
+3. Install the python module:
 
     ```console
     pip install .
