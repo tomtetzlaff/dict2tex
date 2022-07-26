@@ -4,7 +4,7 @@
 all: example
 
 ## create LaTeX table from parameter file
-example: example.tex example.py config.yml ../dict2tex.py params.json
+example: example.tex example.py config.yml ../dict2tex/dict2tex.py params.json
 
 	python example.py && \
 	pdflatex --shell-escape example.tex && \

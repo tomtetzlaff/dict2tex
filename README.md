@@ -41,7 +41,37 @@ macros.tex:
 ...
 ```
 
+## Installing ```dict2tex```
 
+1. Clone this repository:
+
+    ```
+    git clone https://github.com/tomtetzlaff/dict2tex.git
+    ```
+    
+    or
+    
+    ```
+    git clone git@github.com:tomtetzlaff/dict2tex.git
+    ```
+
+2. Enter the source directory:
+
+    ```
+    cd dict2tex
+    ```
+
+3. Install the python package:
+
+    ```
+    pip install .
+    ```
+
+    or
+
+    ```
+    python setup.py install
+    ```
 
 ## Example
 
