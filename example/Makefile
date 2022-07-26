@@ -3,8 +3,14 @@
 
 all: example
 
+## install python package
+install: ../dict2tex/dict2tex.py
+
+	cd .. && \
+	pip install --upgrade .
+
 ## create LaTeX table from parameter file
-example: example.tex example.py config.yml ../dict2tex/dict2tex.py params.json
+example: example.tex example.py config.yml params.json ../dict2tex/dict2tex.py
 
 	python example.py && \
 	pdflatex --shell-escape example.tex && \

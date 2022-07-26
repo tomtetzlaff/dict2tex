@@ -16,8 +16,8 @@ The table styles are configurable (see config.yml).
 
 '''
 
-import sys
-sys.path.append('../')
+#import sys
+#sys.path.append('../')
 import dict2tex
 import yaml
 
