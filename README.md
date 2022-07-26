@@ -86,7 +86,7 @@ The two main functions are
 * `dict2tex.tex_macros()`: Creates LaTeX code for parameter macro definitions.
 * `dict2tex.tex_table()`: Creates LaTeX code for a parameter table.
 
-See python documentation of these functions (`help()`) for a detailed description.
+See the python documentation of these functions (`help()`) for a detailed description.
 
 The contents and style of the parameter tables and LaTeX macros are configurable. See `example/example.py` and `example/config.yml`.
 
