@@ -265,7 +265,7 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
 
 def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,section_text_color='black',section_title_color='lightgray',macro_prefix='P'):
     '''
-    Create LaTeX code for parameter table with parameter definitions extracted from a parameter json file.
+    Creates LaTeX code for a parameter table from parameter definitions stored in a python dictionary, ad writes it to file.
 
     Arguments:
     ----------
@@ -357,7 +357,7 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
 
 def tex_macros(pars,macros_tex_file,macros_prefix='P'):
     '''
-    Create LaTeX code for parameter macro definitions and writes it to file.
+    Creates LaTeX code for parameter macro definitions from parameter definitions stored in a python dictionary, and writes it to file.
 
     Note: LateX macros names match the key names in the parameter dictionary, 
     with prefix macros_prefix added to avoid collisions with existing LaTeX function names.
