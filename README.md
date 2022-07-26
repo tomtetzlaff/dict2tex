@@ -85,15 +85,18 @@ make
 which produces the pdf file `example.pdf`.
 
 ### File description
+#### Sources
 * `example/create_params_file.py`: Creates a mock-up parameter set and stores it in `params.json`.
-* `example/example.py`: Loads `params.json` and converts it to
-
-   - a LaTeX file `parameter_table.tex` containing a parameter table,
-   - a LaTeX file `macros.tex` containing macro definitions, and
-   - a LaTeX file `macros_table.tex` containing a table showing macro definitions.
-
+* `example/example.py`: Loads `params.json` and converts it to LaTeX code for parameter tables and macro definitions.
 * `example/example.tex`: LaTeX main manuscript importing `macros.tex`, `macros_table.tex`, and `parameter_table.tex`.
-* `example/config.yml`: Configuration file used to configure table contents and style, macro names, and file names.
+* `example/config.yml`: Configuration file used to specify table contents and style, macro names, and file names.
+
+#### Targets
+* `example/example.pdf`: Final pdf document containing examples of parameter and macro tables, as well as text based on automatically generated macro definitions.
+* `parameter_table.tex`: LaTeX file containing a parameter table. Included in `example/example.tex`.
+* `macros.tex`: LaTeX file containing macro definitions. Included in `example/example.tex`.
+* `macros_table.tex`: LaTeX file containing a table showing macro definitions. Included in `example/example.tex`.
+
 
 ## Requirements
 The code and the example have been tested with `python 3.9`, and depend only on basic python packages such as `json`, `numpy`, and `yaml`.
