@@ -335,6 +335,10 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
     if field_type == 'value' and type(field)!=str:    
         field_str = r"$%s$" % field
 
+    # math mode for numerical values, simple string else
+    if field_type == 'value' and type(field)==bool:    
+        field_str = r"%s" % field
+        
     # verbatim (typewriter) for keys        
     elif field_type == 'key':                         
         field_str = r"\verb+%s+" % field
