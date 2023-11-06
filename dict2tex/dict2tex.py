@@ -60,7 +60,8 @@ def get_section_subdict(pardict,section):
 
 ##################################################
 
-def tex_table_header(texfile,table_columns,table_column_widths=None):
+#def tex_table_header(texfile,table_columns,table_column_widths=None):
+def tex_table_header(texfile,table_columns):    
     '''
     Creates header of the LaTeX table.
 
@@ -72,8 +73,8 @@ def tex_table_header(texfile,table_columns,table_column_widths=None):
     table_columns: list(dict)
     List of dictionaries defining table columns (field and title).
 
-    table_column_widths: list(float) or None
-    List of relative columns widths. If None, column widths are automatically chosen by LaTeX.
+    #table_column_widths: list(float) or None
+    #List of relative columns widths. If None, column widths are automatically chosen by LaTeX.
 
     Returns:
     --------
@@ -85,22 +86,22 @@ def tex_table_header(texfile,table_columns,table_column_widths=None):
     
     f=open(texfile, 'w')
         
-    if table_column_widths == None:
-        f.write(r"\begin{tabular}{|%s}" % (n_columns*"l|") + "\n")
-    else:
+    # if table_column_widths == None:
+    #     f.write(r"\begin{tabular}{|%s}" % (n_columns*"l|") + "\n")
+    # else:
 
-        if len(table_column_widths) != n_columns:
-            raise Exception("Number of elements in 'table_column_widths' must match number of columns.")
+    #     if len(table_column_widths) != n_columns:
+    #         raise Exception("Number of elements in 'table_column_widths' must match number of columns.")
 
-        table_column_widths_norm = np.array(table_column_widths)/np.sum(table_column_widths)
+    #     table_column_widths_norm = np.array(table_column_widths)/np.sum(table_column_widths)
 
-        table_format_str = r"|"
-        for w in table_column_widths_norm:
-            table_format_str += r"p{%.3f\linewidth}|" % (w)
+    #     table_format_str = r"|"
+    #     for w in table_column_widths_norm:
+    #         table_format_str += r"p{%.3f\linewidth}|" % (w)
     
-        f.write(r"\begin{tabular}{%s}" % (table_format_str) + "\n")
+    #     f.write(r"\begin{tabular}{%s}" % (table_format_str) + "\n")
 
-    f.write(r"\hline" + "\n")
+    # f.write(r"\hline" + "\n")
 
     for c in range(n_columns):
         f.write(r"\textbf{%s}" % (table_columns[c]['title'])) ## column title        
@@ -108,6 +109,7 @@ def tex_table_header(texfile,table_columns,table_column_widths=None):
             f.write(r"  &  ")  ## column separator
 
     f.write(r"\\" + "\n")
+    f.write(r"\endhead" + "\n")    
     f.write(r"\hline" + "\n")
     f.close()
 
@@ -263,7 +265,8 @@ def tex_subtable(pars_section,section_title,table_columns,texfile,color='black',
 
 ##################################################
 
-def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,section_text_color='black',section_title_color='lightgray',macro_prefix='P'):
+#def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_sections,section_text_color='black',section_title_color='lightgray',macro_prefix='P'):
+def tex_table(pars,params_tex_file,table_columns,table_sections,section_text_color='black',section_title_color='lightgray',macro_prefix='P'):
     '''
     Creates LaTeX code for a parameter table from parameter definitions stored in a python dictionary, ad writes it to file.
 
@@ -278,8 +281,8 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     table_columns: list(dict)
     List of dictionaries defining table columns (field and title).
 
-    table_column_widths: list(float) or None
-    List of relative columns widths. If None, column widths are automatically chosen by LaTeX.
+    #table_column_widths: list(float) or None
+    #List of relative columns widths. If None, column widths are automatically chosen by LaTeX.
 
     table_sections: list(dict)
     List of dictionaries defining table sections to be printed, section titles, and text color.
@@ -300,12 +303,13 @@ def tex_table(pars,params_tex_file,table_columns,table_column_widths,table_secti
     '''
 
     #### prepare table and set table header
-    tex_table_header(params_tex_file, table_columns, table_column_widths)
+    #tex_table_header(params_tex_file, table_columns, table_column_widths)
+    tex_table_header(params_tex_file, table_columns)
     
     #### print core of the table for all sections
     tex_table_core(pars, params_tex_file, table_columns, table_sections,section_text_color,section_title_color,macro_prefix=macro_prefix)                
     #### close table
-    tex_table_footer(params_tex_file)
+    #tex_table_footer(params_tex_file)
 
 ##################################################
 

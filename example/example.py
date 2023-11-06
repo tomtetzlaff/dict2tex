@@ -40,18 +40,35 @@ if __name__ == "__main__":
     dict2tex.tex_table(pars,\
                        config['macros_table_tex_file'],\
                        config['macros_table_columns'],\
-                       config['macros_table_column_widths'],\
                        config['macros_table_sections'],\
-                       config['section_text_color'],\
-                       config['section_title_color'],\
-                       config['macros_prefix'])
+                       section_text_color=config['section_text_color'],\
+                       section_title_color=config['section_title_color'],\
+                       macro_prefix=config['macros_prefix'])
     
     ## create parameter table
     dict2tex.tex_table(pars,\
                        config['params_table_tex_file'],\
                        config['params_table_columns'],\
-                       config['params_table_column_widths'],\
                        config['params_table_sections'],\
-                       config['section_text_color'],\
-                       config['section_title_color'])
+                       section_text_color=config['section_text_color'],\
+                       section_title_color=config['section_title_color'])
+
+    # ## table with parameter macro definitions and 
+    # dict2tex.tex_table(pars,\
+    #                    config['macros_table_tex_file'],\
+    #                    config['macros_table_columns'],\
+    #                    config['macros_table_column_widths'],\
+    #                    config['macros_table_sections'],\
+    #                    section_text_color=config['section_text_color'],\
+    #                    section_title_color=config['section_title_color'],\
+    #                    macro_prefix=config['macros_prefix'])
+    
+    # ## create parameter table
+    # dict2tex.tex_table(pars,\
+    #                    config['params_table_tex_file'],\
+    #                    config['params_table_columns'],\
+    #                    config['params_table_column_widths'],\
+    #                    config['params_table_sections'],\
+    #                    section_text_color=config['section_text_color'],\
+    #                    section_title_color=config['section_title_color'])
 

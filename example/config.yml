@@ -22,7 +22,7 @@ params_table_columns:
   title: Description
 
 ## relative column widths
-params_table_column_widths: [1,2,4]
+#params_table_column_widths: [1,2,4]
 
 ## select sections and section titles to be printed in table, and text color, and
 ## background color of section titles.
@@ -47,7 +47,7 @@ params_table_sections:
   title: Input
 - section: simulation
   title: Simulation
-  
+
 ######################################################################
 # LaTeX macros
 
@@ -73,7 +73,7 @@ macros_table_columns:
   title: Description
 
 ## relative column widths
-macros_table_column_widths: [1,1,1,3]
+#macros_table_column_widths: [1,1,1,3]
 
 ## select sections and section titles to be printed in table, and text color, and
 ## background color of section titles.
@@ -98,4 +98,3 @@ macros_table_sections:
   title: Input
 - section: simulation
   title: Simulation
-  
