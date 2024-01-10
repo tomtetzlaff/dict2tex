@@ -357,7 +357,7 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
     # field_type == 'unit': string, or
     # field_type == 'docstring': string        
     else:
-        field_str = "%s" % (field)
+        field_str = r"%s" % (field)
 
     return field_str
 
