@@ -319,7 +319,7 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
 
     Arguments:
     ----------
-    field: int, float, str or lists thereof
+    field: int, float, str, bool or lists thereof
     Parameter field to be converted to LaTeX string.
 
     field_type: str
@@ -352,13 +352,17 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
         field_str = r"\verb+\%s%s+" % (prefix,field)
         field_str = field_str.replace('_','')   ## remove underscores "_'
 
-    # no formatting if
-    # field_type == 'value' and type(field)==str: string, or
+    # verbatim for string values
+    elif field_type == 'value' and type(field)==str:
+         field_str = r"\verb+%s+" % (field)
+         
+    # no special formatting if
     # field_type == 'unit': string, or
     # field_type == 'docstring': string        
+
     else:
         field_str = r"%s" % (field)
-
+        
     return field_str
 
 ##################################################
