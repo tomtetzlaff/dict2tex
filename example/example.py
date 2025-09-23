@@ -1,6 +1,5 @@
 '''
-#This example turns a python dictionary (params.json) containing parameter definitions 
-This example turns a yaml file (params.yaml) containing parameter definitions 
+This example turns a json file (params.json) containing parameter definitions 
 into LaTeX code for parameter tables and macro definitions.
 
 Executing this script generates the files 
