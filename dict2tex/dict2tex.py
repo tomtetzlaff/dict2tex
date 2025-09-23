@@ -323,7 +323,7 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
     Parameter field to be converted to LaTeX string.
 
     field_type: str
-    Type of the parameter field, such as 'value', 'unit', 'docstring', 'section', 'key', 'macro'.
+    Type of the parameter field, such as 'value', 'unit', 'description', 'section', 'key', 'macro'.
 
     prefix: str
     Prefix to be used for macros (optional; default: '').
@@ -336,12 +336,12 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
     '''
 
     # math mode for numerical values, simple string else
-    if field_type == 'value' and type(field)!=str:    
-        field_str = r"$%s$" % field
-
-    # math mode for numerical values, simple string else
-    if field_type == 'value' and type(field)==bool:    
-        field_str = r"%s" % field
+    if field_type == 'value' and type(field)!=str and type(field)!=bool:    
+        field_str = r"$%g$" % field
+        
+    # math mode for boolean values, simple string else
+    #if field_type == 'value' and type(field)==bool:    
+    #    field_str = r"%s" % field
         
     # verbatim (typewriter) for keys        
     elif field_type == 'key':                         
@@ -355,10 +355,15 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
     # verbatim for string values
     elif field_type == 'value' and type(field)==str:
          field_str = r"\verb+%s+" % (field)
+
+    # replace "_" in description
+    elif field_type == 'description'  and type(field)==str:
+        field_str = r"%s" % (field)        
+        field_str = field_str.replace('$$','')   ## remove obsolete $'s
          
     # no special formatting if
     # field_type == 'unit': string, or
-    # field_type == 'docstring': string        
+    # field_type == 'description': string        
 
     else:
         field_str = r"%s" % (field)
@@ -398,12 +403,12 @@ def tex_macros(pars,macros_tex_file,macros_prefix='P'):
         key_str = r"%s" % key
         key_str = key_str.replace('_','')   ## remove underscores "_'
 
-        name_str = pars[key]['name']
+        name_str = pars[key]['latex']
         name_str = name_str.replace('$','')   ## remove dollar signs
         
         ## macro_prefix added to avoid collision with existing latex function names
-        #f.write(r"\newcommand{\P%s}{\ensuremath{%s}}     %%%% %s" % (key_str,name_str,pars[key]['docstring']) + "\n")  
-        f.write(r"\def\%s%s{\ensuremath{%s} }     %%%% %s" % (macros_prefix,key_str,name_str,pars[key]['docstring']) + "\n")
+        #f.write(r"\newcommand{\P%s}{\ensuremath{%s}}     %%%% %s" % (key_str,name_str,pars[key]['description']) + "\n")  
+        f.write(r"\def\%s%s{\ensuremath{%s} }     %%%% %s" % (macros_prefix,key_str,name_str,pars[key]['description']) + "\n")
 
 
     f.close()

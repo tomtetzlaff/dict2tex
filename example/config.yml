@@ -14,11 +14,11 @@ params_table_tex_file: 'parameter_table.tex'
 ## definition of table columns: parameter fields and column titles
 ## (note: multiple fields can be printed in the same column (e.g., value and unit) using lists of fields)
 params_table_columns:
-- field: name
+- field: latex
   title: Name
 - field: [value, unit]
   title: Value
-- field: docstring
+- field: description
   title: Description
 
 ## relative column widths
@@ -29,24 +29,30 @@ params_table_columns:
 ## note: title, color and title_color are optional. If not defined, default values
 ## will be used: title=None (no title printed), color=black, and title_color=lightgray
 params_table_sections:
-- section: network
-  title: Network
-- section: network_drvd
-  color: gray
-- section: connectivity
-  title: Connectivity
-- section: connectivity_drvd
+- section: populations
+  title: Populations
+- section: populations_drvd
   color: gray
 - section: neuron
   title: Neuron
+- section: neuron_drvd
+  color: gray
 - section: synapse
   title: Synapse
 - section: synapse_drvd
   color: gray
 - section: input
   title: Input
-- section: simulation
-  title: Simulation
+# - section: simulation
+#   title: Simulation
+# - section: simulator
+#   title: Simulator
+# - section: simulator_drvd
+#   color: gray
+# - section: recording
+#   title: Recording
+# - section: environment
+#   title: Environment
 
 ######################################################################
 # LaTeX macros
@@ -63,13 +69,13 @@ macros_table_tex_file: 'macros_table.tex'
 
 ## definition of table columns: parameter fields and column titles
 macros_table_columns:
-- field: name
+- field: latex
   title: Name (LaTeX)
 - field: key
   title: Name (code)
 - field: macro
   title: Macro
-- field: docstring
+- field: description
   title: Description
 
 ## relative column widths
@@ -80,21 +86,27 @@ macros_table_columns:
 ## note: title, color and title_color are optional. If not defined, default values
 ## will be used: title=None (no title printed), color=black, and title_color=lightgray
 macros_table_sections:
-- section: network
-  title: Network
-- section: network_drvd
-  color: gray
-- section: connectivity
-  title: Connectivity
-- section: connectivity_drvd
+- section: populations
+  title: Populations
+- section: populations_drvd
   color: gray
 - section: neuron
   title: Neuron
+- section: neuron_drvd
+  color: gray
 - section: synapse
   title: Synapse
 - section: synapse_drvd
   color: gray
 - section: input
   title: Input
-- section: simulation
-  title: Simulation
+# - section: simulation
+#   title: Simulation
+# - section: simulator
+#   title: Simulator
+# - section: simulator_drvd
+#   color: gray
+# - section: recording
+#   title: Recording
+# - section: environment
+#   title: Environment

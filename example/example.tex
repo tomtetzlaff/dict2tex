@@ -1,10 +1,16 @@
-%% example LaTeX script including macro definitions and parameter tables generated from a parameter file
-%% (Tom Tetzlaff, 2022)
+%% Example LaTeX script including macro definitions and parameter tables generated from a parameter file.
+%%
+%% Compile with:
+%%
+%% pdflatex --shell-escape example.tex
+%%
+%% (Tom Tetzlaff, 2022, 2025)
 
 \documentclass[10pt,a4paper,american]{article}
 \usepackage{geometry}
 \geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
 \usepackage{amsmath}
+\usepackage{calc}
 \usepackage[table]{xcolor}
 \renewcommand\familydefault{cmss}
 \usepackage[breaklinks=true,colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,filecolor=blue]{hyperref}
@@ -40,6 +46,7 @@
 %% Parameter table
 \def\cptn{Model and simulation parameters. Secondary parameters derived from primary parameters are marked in gray}
 \renewcommand{\arraystretch}{1.5}
+
 \begin{longtable}{|p{0.2\linewidth-2\tabcolsep}|p{0.2\linewidth-2\tabcolsep}|p{0.6\linewidth-2\tabcolsep}|}
   \caption{\cptn~(continued on next page).}
   \label{tab:parameter_table}
@@ -74,8 +81,8 @@
 The following text examples use LaTeX macros for parameter names automatically generated from a dictionary provided in \texttt{params.json}:
 \begin{itemize}
 \item The size \PN of the network was chosen such that everybody is impressed.
-\item Application of TTX is micked by setting the spike threshold \PVth to infinity.
-\item The weight $\PJI=-\Pg\PJ$ of inhibitory synapses plays no role.
+\item Application of TTX is micked by setting the spike threshold \PVthrE to infinity.
+\item The weight $\PwEI$ of inhibitory synapses plays no role.
 \end{itemize}
 %%
 For an overview, the macro definitions can be visualized in a table such as \cref{tab:macros_table}.
@@ -120,7 +127,8 @@ Macro names are automatically generated from the keys of the parameter dictionar
   \section{Parameter file \texttt{params.json}}
   \label{app:parameter_file}
   {\footnotesize
-    \inputminted{json}{params.json}  
+    \inputminted{json}{params.json}
+    %\inputminted{yaml}{params.yaml}      
   }
   
   \clearpage

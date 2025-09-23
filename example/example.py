@@ -1,5 +1,6 @@
 '''
-This example turns a python dictionary (params.json) containing parameter definitions 
+#This example turns a python dictionary (params.json) containing parameter definitions 
+This example turns a yaml file (params.yaml) containing parameter definitions 
 into LaTeX code for parameter tables and macro definitions.
 
 Executing this script generates the files 
@@ -12,7 +13,7 @@ which can be included in a LaTeX source file (see example.tex).
 
 The table styles are configurable (see config.yml).
 
-(Tom Tetzlaff, 2022)
+(Tom Tetzlaff, 2022, 2025)
 
 '''
 
@@ -20,18 +21,24 @@ The table styles are configurable (see config.yml).
 #sys.path.append('../')
 import dict2tex
 import yaml
+from pathlib import Path
 
 #############################            
 if __name__ == "__main__":
 
-    config_file = 'config.yml'
+    config_file = Path('config.yml')
 
     ## load configurations
     with open(config_file, "r") as stream:    
         config = yaml.safe_load(stream)
         
     ## load parameters
-    pars = dict2tex.load_parameters_from_json(config['params_file'])    
+    #parameter_file = Path('params.yaml')
+    #with open(parameter_file, "r") as f:
+    #    pars = yaml.safe_load(f)        
+    
+    #pars = dict2tex.load_parameters_from_json(config['params_file'])
+    pars = dict2tex.load_parameters_from_json(config['params_file'])        
 
     ## parameter macro definitions
     dict2tex.tex_macros(pars,config['macros_tex_file'],config['macros_prefix'])     

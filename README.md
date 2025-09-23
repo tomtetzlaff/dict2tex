@@ -12,23 +12,23 @@ on identical sources. This is an easy task, provided information on model parame
 ```json
 {
     "N": {
-        "name": "$N$",
+        "latex": "$N$",
         "value": 10000,
         "unit": "",
-        "docstring": "network size",
+        "description": "network size",
         "section": "network"
     },
     "dt": {
-        "name": "$\\Delta{}t$",
+        "latex": "$\\Delta{}t$",
         "value": 0.125,
         "unit": "ms",
-        "docstring": "simulation time resolution",
+        "description": "simulation time resolution",
         "section": "simulation"
     },
 }
 ```
 
-Here, each parameter (such as `N` or `dt`) is not only connected to a `value` and a physical `unit`, but also to a descriptor explaining the meaning of the parameter (`docstring`), LaTeX code for typesetting parameters in LaTeX (`name`), as well as a specification of the parameter type (`section`).
+Here, each parameter (such as `N` or `dt`) is not only connected to a `value` and a physical `unit`, but also to a descriptor explaining the meaning of the parameter (`description`), LaTeX code for typesetting parameters in LaTeX (`latex`), as well as a specification of the parameter type (`section`).
 
 `dict2tex.py` contains a set of python functions that help to automate the conversion of such parameter dictionaries into LaTeX code used for preparing manuscripts. Two typical use cases are automatically generated parameter tables ([example](https://doi.org/10.1371/journal.pcbi.1007790.s002)), and automatically generated files containing LaTeX macros, such as
 
