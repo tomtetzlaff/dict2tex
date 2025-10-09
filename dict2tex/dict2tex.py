@@ -336,9 +336,14 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
     '''
 
     # math mode for numerical values, simple string else
-    if field_type == 'value' and type(field)!=str and type(field)!=bool:    
+    if field_type == 'value' and type(field)!=str and type(field)!=bool and type(field)!=list:        
+        print(field)
         field_str = r"$%g$" % field
-        
+
+#    if field_type == 'value' and type(field)!=str and type(field)!=bool:
+#        print(field)
+#        field_str = r"$%g$" % field
+    
     # math mode for boolean values, simple string else
     #if field_type == 'value' and type(field)==bool:    
     #    field_str = r"%s" % field
