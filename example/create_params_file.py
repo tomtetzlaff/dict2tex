@@ -9,7 +9,7 @@ Each parameter is stored as a subdictionary composed of
 - the parameter name (as used in simulation code),
 - the parameter value,
 - the unit of the parameter,
-- a docstring containg a textual description of the parameter, 
+- a textual description of the parameter, 
 - a name of the parameter as used in LaTeX documentations, and
 - a label representing the parameter type (e.g., network parameter, neuron parameter, simulation parameter,...).
 
@@ -110,7 +110,7 @@ def derived_parameters(pars):
 
 ##########################################################################
 
-def par(key, value, unit, docstring, section, name, pardict):
+def par(key, value, unit, description, section, latex, pardict):
     '''
     Constructs an entry in a parameter dictionary pardict
     of type
@@ -118,8 +118,8 @@ def par(key, value, unit, docstring, section, name, pardict):
     pardict[key]={
        'value': value,
        'unit': unit,
-       'docstring': doctstring,
-       'name': name,
+       'description': description,
+       'latex': latex,
        'section': section
     }
 
@@ -134,14 +134,14 @@ def par(key, value, unit, docstring, section, name, pardict):
     unit: str
     Unit of the parameter.
 
-    docstring: str
+    description: str
     Textual description of the parameter.
 
     section: str
     Label represeting parameter type.
 `   Useful for structuring parameters, and to create distinct tables in LaTeX.
 
-    name: string
+    latex: string
     Name of the parameter as used in LaTeX documentation.
 
     pardict: dict
@@ -155,10 +155,10 @@ def par(key, value, unit, docstring, section, name, pardict):
 
     if key not in pardict:
         pardict[key]={}
-        pardict[key]['name']=name
+        pardict[key]['latex']=latex
         pardict[key]['value']=value
         pardict[key]['unit']=unit
-        pardict[key]['docstring']=docstring
+        pardict[key]['description']=description
         pardict[key]['section']=section
     else:
         ## TODO: Think about whether this is a good strategy.
