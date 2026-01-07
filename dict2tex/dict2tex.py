@@ -357,8 +357,8 @@ def convert_field_to_tex_string(field, field_type, prefix=''):
         field_str = field_str.replace('_','')   ## remove underscores "_'
 
     # verbatim for string values
-    elif field_type == 'value' and type(field)==str:
-         field_str = r"\verb+%s+" % (field)
+    #elif field_type == 'value' and type(field)==str:
+    #     field_str = r"\verb+%s+" % (field)
 
     # replace "_" in description
     elif field_type == 'description'  and type(field)==str:
